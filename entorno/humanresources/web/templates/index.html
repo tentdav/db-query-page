@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Barra filtradora -->
+<header>
+    <div id="filter">
+        <form id="back" class="form-inline mb-3">
+            <div class="row">
+                <div class="col-md-3 col-sm-12 form-group">
+                    <label for="businessentityid">Business Entity ID:</label>
+                    <input type="text" class="form-control" id="businessentityid" name="businessentityid">
+                </div>
+                <div class="col-md-3 col-sm-12 form-group">
+                    <label for="jobtitle">Job Title:</label>
+                    <input type="text" class="form-control" id="jobtitle" name="jobtitle">
+                </div>
+                <div class="col-md-3 col-sm-12 form-group">
+                    <label for="gender">Gender:</label>
+                    <select class="form-control" id="gender" name="gender">
+                        <option value="">All</option>
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
+                    </select>
+                </div>
+                <div class="col-md-3 col-sm-12 align-self-end">
+                    <button type="submit" class="btn btn-primary btn-block">Filtrar</button>
+                    <a href="{% url 'login' %}" class="btn btn-danger ml-2">Logout</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</header>
+
+<hr>
+<!-- Tabla de datos -->
+<table id="tabla" class="table table-primary">
+    <thead>
+      <tr>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">BusinessentityID</th>
+        <th scope="col">Job Title</th>
+        <th scope="col">Gender</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for person in person %}
+        <tr>
+            <td>{{ person.firstname }}</td>
+            <td>{{ person.lastname }}</td>
+            <td>{{ person.businessentityid }}</td>
+            <td>{{ person.employee.jobtitle }}</td>
+            <td>{{ person.employee.gender }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+
+
+{% endblock %}
